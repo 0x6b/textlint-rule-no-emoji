@@ -8,7 +8,7 @@ tester.run("textlint-rule-no-emoji", rule, {
    invalid: [
       {
          text: "Hello 👋 World",
-         output: "Hello   World",
+         output: "Hello World",
          errors: [
             {
                index: 6,
@@ -18,7 +18,7 @@ tester.run("textlint-rule-no-emoji", rule, {
       },
       {
          text: "Great work! 🎉🎊",
-         output: "Great work!   ",
+         output: "Great work!",
          errors: [
             {
                index: 12,
@@ -32,7 +32,7 @@ tester.run("textlint-rule-no-emoji", rule, {
       },
       {
          text: "I ❤️ coding",
-         output: "I   coding",
+         output: "I coding",
          errors: [
             {
                index: 2,
@@ -42,7 +42,7 @@ tester.run("textlint-rule-no-emoji", rule, {
       },
       {
          text: "Thinking 🤔 about it",
-         output: "Thinking   about it",
+         output: "Thinking about it",
          errors: [
             {
                index: 9,
@@ -52,7 +52,7 @@ tester.run("textlint-rule-no-emoji", rule, {
       },
       {
          text: "😀😃😄😁",
-         output: "    ",
+         output: "",
          errors: [
             {
                index: 0,
@@ -74,10 +74,20 @@ tester.run("textlint-rule-no-emoji", rule, {
       },
       {
          text: "No space before🎯 has space after",
-         output: "No space before  has space after",
+         output: "No space before has space after",
          errors: [
             {
                index: 15,
+               message: "Found emoji character (\\ud83c\\udfaf)",
+            },
+         ],
+      },
+      {
+         text: "🎯 the start of the line",
+         output: "the start of the line",
+         errors: [
+            {
+               index: 0,
                message: "Found emoji character (\\ud83c\\udfaf)",
             },
          ],
