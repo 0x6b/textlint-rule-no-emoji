@@ -1,0 +1,58 @@
+{
+  "name": "@0x6b/textlint-rule-no-emoji",
+  "version": "0.1.0",
+  "description": "textlint rule which detects and reports emoji characters in the document.",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": ["textlintrule", "emoji"],
+  "homepage": "https://github.com/0x6b/textlint-rule-no-emoji",
+  "bugs": {
+    "url": "https://github.com/0x6b/textlint-rule-no-emoji/issues"
+  },
+  "license": "MIT",
+  "author": "0x6b",
+  "files": ["lib/", "src/"],
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0x6b/textlint-rule-no-emoji.git"
+  },
+  "scripts": {
+    "build": "textlint-scripts build",
+    "precommit": "lint-staged",
+    "postcommit": "git reset",
+    "prepublish": "pnpm run build",
+    "test": "textlint-scripts test",
+    "format": "biome check --write .",
+    "watch": "textlint-scripts build --watch"
+  },
+  "dependencies": {
+    "emoji-regex": "^10.5.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@textlint/types": "^15.2.3",
+    "@types/node": "^24.7.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.4",
+    "textlint-scripts": "^15.2.3",
+    "textlint-tester": "^15.2.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json}": [
+      "git stash --keep-index",
+      "biome check --write --no-errors-on-unmatched",
+      "git stash pop"
+    ]
+  }
+}
