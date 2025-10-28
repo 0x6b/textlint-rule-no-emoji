@@ -1,8 +1,7 @@
 {
   "name": "@0x6b/textlint-rule-no-emoji",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "textlint rule which detects and reports emoji characters in the document.",
-  "type": "module",
   "publishConfig": {
     "access": "public"
   },
