@@ -4,7 +4,15 @@ import rule from "../src";
 const tester = new TextLintTester();
 
 tester.run("textlint-rule-no-emoji", rule, {
-   valid: ["Normal text without any emoji", "Text with numbers 123 and symbols !@#$%"],
+   valid: [
+      "Normal text without any emoji",
+      "Text with numbers 123 and symbols !@#$%",
+      // Text-default emoji characters (Emoji=Yes, Emoji_Presentation=No) without FE0F
+      "Copyright © 2024",
+      "Registered ® trademark",
+      "Trade mark ™ symbol",
+      "Multiple text symbols: © ® ™",
+   ],
    invalid: [
       {
          text: "Hello 👋 World",
@@ -89,6 +97,27 @@ tester.run("textlint-rule-no-emoji", rule, {
             {
                index: 0,
                message: "Found emoji character (\\ud83c\\udfaf)",
+            },
+         ],
+      },
+      // Text-default emoji with explicit FE0F should be flagged
+      {
+         text: "Copyright ©️ 2024",
+         output: "Copyright 2024",
+         errors: [
+            {
+               index: 10,
+               message: "Found emoji character (\\u00a9\\ufe0f)",
+            },
+         ],
+      },
+      {
+         text: "Registered ®️ trademark",
+         output: "Registered trademark",
+         errors: [
+            {
+               index: 11,
+               message: "Found emoji character (\\u00ae\\ufe0f)",
             },
          ],
       },
